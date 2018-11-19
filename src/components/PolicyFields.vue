@@ -100,13 +100,14 @@ export default {
       }
   },
   mounted: function () {
-      this.$store.dispatch('getFields', this.id)
-      for (const [key, value] of Object.entries(this.fields)) {
-          console.log(key, value)
-          if (value['enumerate'] === true) {
-            this.variants[value['id']]=value['enum_text'].split(this.join_str)
+      this.$store.dispatch('getFields', this.id).then(() => {
+          for (const [key, value] of Object.entries(this.fields)) {
+              console.log(key, value)
+              if (value['enumerate'] === true) {
+                this.variants[value['id']]=value['enum_text'].split(this.join_str)
+              }
           }
-      }
+      })
       console.log('fields', this.variants)
   }
 }
